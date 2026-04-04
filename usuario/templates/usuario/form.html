@@ -1,0 +1,36 @@
+{% extends 'usuario/base.html' %}
+
+{% block conteudo %}
+
+<h2 class="mb-4">Formulário de Usuário</h2>
+
+<div class="card shadow p-4">
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.tipo_usuario.label_tag }}
+            {{ form.tipo_usuario }}
+        </div>
+
+        <button class="btn btn-success">Salvar</button>
+        <a href="{% url 'listar_usuario' %}" class="btn btn-secondary">Voltar</a>
+    </form>
+</div>
+
+{% endblock %}

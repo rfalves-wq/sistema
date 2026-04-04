@@ -1,0 +1,68 @@
+{% extends 'usuario/base.html' %}
+
+{% block conteudo %}
+
+<h2 class="mb-4">Dashboard Recepcionista</h2>
+
+<div class="row">
+
+    <!-- BOAS VINDAS -->
+    <div class="col-md-12 mb-3">
+        <div class="card shadow p-3">
+            <h4>Bem-vindo, {{ request.user.username }} 👋</h4>
+            <p>Área de atendimento e cadastro</p>
+        </div>
+    </div>
+
+    <!-- AÇÕES RÁPIDAS -->
+    <div class="col-md-6 mb-3">
+        <div class="card shadow p-3 text-center">
+            <h5>Cadastrar Paciente</h5>
+           <a href="{% url 'cadastrar_paciente' %}" class="btn btn-primary mt-2">
+    + Novo Paciente
+</a>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <div class="card shadow p-3 text-center">
+            <h5>Ver Paciente</h5>
+            <a href="{% url 'listar_pacientes' %}" class="btn btn-dark mt-2">
+                Visualizar Lista
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- LISTA RÁPIDA -->
+<div class="card shadow mt-4">
+    <div class="card-body">
+        <h5>Últimos Usuários</h5>
+
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Usuário</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.username }}</td>
+                    <td>{{ usuario.tipo_usuario }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">Nenhum usuário</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

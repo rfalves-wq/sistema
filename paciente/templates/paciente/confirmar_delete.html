@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Paciente</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+
+    <div class="alert alert-danger text-center">
+        <h4>⚠️ Tem certeza que deseja excluir?</h4>
+        <p><strong>{{ paciente.nome }}</strong></p>
+    </div>
+
+    <form method="post" class="text-center">
+        {% csrf_token %}
+
+        <button type="submit" class="btn btn-danger">
+            🗑 Sim, excluir
+        </button>
+
+        <a href="{% url 'listar_pacientes' %}" class="btn btn-secondary">
+            Cancelar
+        </a>
+    </form>
+
+</div>
+
+</body>
+</html>

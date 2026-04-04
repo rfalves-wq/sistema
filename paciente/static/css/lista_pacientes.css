@@ -1,0 +1,20 @@
+body {
+    background-color: #f8f9fa;
+}
+
+h2 {
+    color: #0057a0;
+}
+
+table {
+    background: white;
+}
+
+.table th {
+    background-color: #0072bc;
+    color: white;
+}
+
+.btn {
+    margin-right: 5px;
+}

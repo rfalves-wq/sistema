@@ -44,6 +44,10 @@ from django.shortcuts import render
 from .models import Agendamento
 
 
+from datetime import date
+from django.shortcuts import render
+from django.utils import timezone
+from .models import Agendamento
 
 def listar_agendamentos(request):
     hoje = date.today()
@@ -52,7 +56,12 @@ def listar_agendamentos(request):
         data=hoje
     ).order_by('-hora')
 
-    total_hoje = agendamentos.count()  # 🔥 TOTAL
+    total_hoje = agendamentos.count()
+
+    # ⏱️ CALCULAR TEMPO DE ESPERA
+    for ag in agendamentos:
+        ag.tempo_espera = timezone.now() - ag.criado_em
+        ag.tempo_espera_formatado = str(ag.tempo_espera).split(".")[0]
 
     return render(request, 'agendamento/listar.html', {
         'agendamentos': agendamentos,
@@ -80,3 +89,20 @@ def buscar_paciente(request):
     return JsonResponse(data, safe=False)
 
 
+from django.utils import timezone
+from django.shortcuts import get_object_or_404, redirect
+from .models import Agendamento
+
+def mudar_status(request, id):
+    agendamento = get_object_or_404(Agendamento, id=id)
+
+    novo_status = request.POST.get('status')
+
+    # ✔️ se estiver sendo finalizado, salva tempo de espera
+    if agendamento.status == 'AGENDADO' and novo_status != 'AGENDADO':
+        agendamento.tempo_espera = timezone.now() - agendamento.criado_em
+
+    agendamento.status = novo_status
+    agendamento.save()
+
+    return redirect('listar_agendamentos')

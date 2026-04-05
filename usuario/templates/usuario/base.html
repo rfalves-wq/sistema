@@ -49,14 +49,14 @@
                 <a href="{% url 'criar_usuario' %}">Cadastrar Usuário</a>
                 {% endif %}
 
-              {% if request.user.tipo_usuario == 'recepcionista' %}
-    <a href="{% url 'dashboard_recepcionista' %}">Dashboard</a>
-    <a href="{% url 'cadastrar_paciente' %}">Cadastrar</a>
-    <a href="{% url 'listar_pacientes' %}">Lista de Pacientes</a>
-    <a href="{% url 'listar_pacientes' %}">Excluir Pacientes</a>
-    <hr>
-    <a href="{% url 'agendar' %}">Agendamento</a>
-{% endif %}
+                {% if request.user.tipo_usuario == 'recepcionista' %}
+                <a href="{% url 'dashboard_recepcionista' %}">Dashboard</a>
+                <a href="{% url 'cadastrar_paciente' %}">Cadastrar</a>
+                <a href="{% url 'listar_pacientes' %}">Lista de Pacientes</a>
+                <a href="{% url 'listar_pacientes' %}">Excluir Pacientes</a>
+                <hr>
+                <a href="{% url 'agendar' %}">Agendamento</a>
+                {% endif %}
 
                 {% if request.user.tipo_usuario == 'medico' %}
                 <a href="{% url 'dashboard_medico' %}">Dashboard</a>

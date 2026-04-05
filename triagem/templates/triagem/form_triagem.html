@@ -1,0 +1,23 @@
+<h2>Triagem do Paciente: {{ paciente.nome }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Pressão:</label>
+    <input type="text" name="pressao"><br><br>
+
+    <label>Sintomas:</label><br>
+    <textarea name="sintomas"></textarea><br><br>
+
+    <label>Classificação:</label>
+    <select name="classificacao">
+        <option value="vermelho">Emergência</option>
+        <option value="laranja">Muito urgente</option>
+        <option value="amarelo">Urgente</option>
+        <option value="verde">Pouco urgente</option>
+        <option value="azul">Não urgente</option>
+    </select>
+
+    <br><br>
+    <button type="submit">Salvar Triagem</button>
+</form>

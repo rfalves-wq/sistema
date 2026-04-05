@@ -18,7 +18,7 @@ class Agendamento(models.Model):
         ],
         default='AGENDADO'
     )
-
+    tempo_espera = models.DurationField(null=True, blank=True)
     criado_em = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

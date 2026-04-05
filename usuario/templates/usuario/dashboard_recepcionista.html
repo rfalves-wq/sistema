@@ -14,55 +14,47 @@
         </div>
     </div>
 
-    <!-- AÇÕES RÁPIDAS -->
+    <!-- CADASTRAR PACIENTE -->
     <div class="col-md-6 mb-3">
         <div class="card shadow p-3 text-center">
             <h5>Cadastrar Paciente</h5>
-           <a href="{% url 'cadastrar_paciente' %}" class="btn btn-primary mt-2">
-    + Novo Paciente
-</a>
+            <a href="{% url 'cadastrar_paciente' %}" class="btn btn-primary mt-2">
+                + Novo Paciente
+            </a>
         </div>
     </div>
 
+    <!-- LISTAR PACIENTES -->
     <div class="col-md-6 mb-3">
         <div class="card shadow p-3 text-center">
-            <h5>Ver Paciente</h5>
+            <h5>Ver Pacientes</h5>
             <a href="{% url 'listar_pacientes' %}" class="btn btn-dark mt-2">
                 Visualizar Lista
             </a>
         </div>
     </div>
 
-</div>
-
-
-<!-- LISTA RÁPIDA -->
-<div class="card shadow mt-4">
-    <div class="card-body">
-        <h5>Últimos Usuários</h5>
-
-        <table class="table table-sm">
-            <thead>
-                <tr>
-                    <th>Usuário</th>
-                    <th>Tipo</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for usuario in usuarios %}
-                <tr>
-                    <td>{{ usuario.username }}</td>
-                    <td>{{ usuario.tipo_usuario }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="2">Nenhum usuário</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
+    <!-- 🔥 NOVO AGENDAMENTO -->
+    <div class="col-md-6 mb-3">
+        <div class="card shadow p-3 text-center">
+            <h5>Agendar Consulta</h5>
+            <a href="{% url 'agendar' %}" class="btn btn-success mt-2">
+                + Novo Agendamento
+            </a>
+        </div>
     </div>
+
+    <!-- 🔥 LISTAR AGENDAMENTOS -->
+    <div class="col-md-6 mb-3">
+        <div class="card shadow p-3 text-center">
+            <h5>Ver Agendamentos</h5>
+            <a href="{% url 'listar_agendamentos' %}" class="btn btn-warning mt-2">
+                Visualizar Agenda
+            </a>
+        </div>
+    </div>
+
 </div>
+
 
 {% endblock %}

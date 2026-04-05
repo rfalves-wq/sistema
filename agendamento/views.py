@@ -39,9 +39,20 @@ def agendar(request):
         'form': form
     })
     
+from datetime import date
+from django.shortcuts import render
+from .models import Agendamento
+
 def listar_agendamentos(request):
-    agendamentos = Agendamento.objects.all().order_by('-data')
-    return render(request, 'agendamento/listar.html', {'agendamentos': agendamentos})    
+    hoje = date.today()
+
+    agendamentos = Agendamento.objects.filter(
+        data=hoje
+    ).order_by('-hora')  # 🔥 ORDEM DECRESCENTE
+
+    return render(request, 'agendamento/listar.html', {
+        'agendamentos': agendamentos
+    })
 
 from django.http import JsonResponse
 from paciente.models import Paciente
@@ -61,3 +72,5 @@ def buscar_paciente(request):
         })
 
     return JsonResponse(data, safe=False)
+
+

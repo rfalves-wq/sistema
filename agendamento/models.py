@@ -8,7 +8,7 @@ class Agendamento(models.Model):
     data = models.DateField()
     hora = models.TimeField()
 
-    motivo = models.CharField(max_length=255, blank=True, null=True)
+   # motivo = models.CharField(max_length=255, blank=True, null=True)
 
     status = models.CharField(
         max_length=20,
@@ -18,7 +18,7 @@ class Agendamento(models.Model):
         ],
         default='AGENDADO'
     )
-    tempo_espera = models.DurationField(null=True, blank=True)
+    #tempo_espera = models.DurationField(null=True, blank=True)
     criado_em = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

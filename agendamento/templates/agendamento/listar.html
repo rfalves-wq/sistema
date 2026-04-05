@@ -49,7 +49,6 @@
                         <th>Paciente</th>
                         <th>Data</th>
                         <th>Hora</th>
-                        <th>Tempo de Espera</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -61,11 +60,6 @@
                     <td>{{ ag.paciente.nome }}</td>
                     <td>{{ ag.data }}</td>
                     <td>{{ ag.hora }}</td>
-
-                    <!-- ⏱️ TEMPO DE ESPERA AO VIVO -->
-                    <td>
-                        <span class="tempo-espera" data-criado="{{ ag.criado_em|date:'c' }}"></span>
-                    </td>
 
                     <!-- STATUS -->
                     <td>
@@ -81,7 +75,7 @@
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="5" class="text-center">
+                    <td colspan="4" class="text-center">
                         Nenhum agendamento encontrado
                     </td>
                 </tr>
@@ -94,35 +88,6 @@
     </div>
 
 </div>
-
-<!-- ⏱️ SCRIPT RELÓGIO AO VIVO -->
-<script>
-function formatTime(diff) {
-    let seconds = Math.floor(diff / 1000);
-    let hours = Math.floor(seconds / 3600);
-    seconds %= 3600;
-    let minutes = Math.floor(seconds / 60);
-    seconds = seconds % 60;
-
-    return `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
-}
-
-function updateTempo() {
-    const elementos = document.querySelectorAll('.tempo-espera');
-
-    elementos.forEach(el => {
-        const criado = new Date(el.dataset.criado);
-        const agora = new Date();
-
-        const diff = agora - criado;
-
-        el.innerText = formatTime(diff);
-    });
-}
-
-setInterval(updateTempo, 1000);
-updateTempo();
-</script>
 
 </body>
 </html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Agendar Consulta</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            max-width: 700px;
+            margin: auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <div class="card shadow p-4">
+
+        <h3 class="mb-4 text-center">📅 Agendamento</h3>
+
+        {% if erro %}
+            <div class="alert alert-danger">
+                {{ erro }}
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- 🔎 PACIENTE -->
+            <div class="mb-3">
+                <label class="form-label">Paciente:</label>
+                <input type="text" id="busca_paciente" class="form-control" placeholder="Digite o nome do paciente">
+            </div>
+
+            <div id="resultados" class="list-group mb-3"></div>
+
+            <div id="paciente_info" class="alert alert-info d-none"></div>
+
+            <input type="hidden" name="paciente_id" id="paciente_id">
+
+            <!-- DATA -->
+            <div class="mb-3">
+                <label class="form-label">Data:</label>
+                {{ form.data }}
+            </div>
+
+            <!-- HORA (CONTROLADA MANUALMENTE) -->
+            <div class="mb-3">
+                <label class="form-label">Hora:</label>
+                <input type="text" name="hora" id="hora" class="form-control">
+            </div>
+
+           
+
+            <!-- STATUS -->
+            <div class="mb-3">
+                <label class="form-label">Status:</label>
+                {{ form.status }}
+            </div>
+
+            <button class="btn btn-success w-100">Salvar Agendamento</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // 📅 DATA
+    flatpickr(".flatpickr-date", {
+        dateFormat: "Y-m-d",
+        locale: "pt-BR"
+    });
+
+    // ⏰ HORA (100% FUNCIONAL)
+flatpickr("#hora", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true,
+    minuteIncrement: 1,
+    defaultDate: new Date() // 🔥 hora atual automática
+});
+
+});
+
+// 🔎 BUSCA PACIENTE
+const input = document.getElementById('busca_paciente');
+const resultados = document.getElementById('resultados');
+const pacienteInfo = document.getElementById('paciente_info');
+const pacienteId = document.getElementById('paciente_id');
+
+input.addEventListener('keyup', function() {
+    let termo = this.value;
+
+    if (termo.length < 2) {
+        resultados.innerHTML = '';
+        return;
+    }
+
+    fetch(`/agendamento/buscar-paciente/?term=${termo}`)
+        .then(response => response.json())
+        .then(data => {
+            resultados.innerHTML = '';
+
+            data.forEach(p => {
+                let item = document.createElement('a');
+                item.classList.add('list-group-item', 'list-group-item-action');
+                item.innerText = `${p.nome} - CPF: ${p.cpf}`;
+
+                item.onclick = function() {
+                    pacienteId.value = p.id;
+                    pacienteInfo.classList.remove('d-none');
+                    pacienteInfo.innerHTML = `<strong>Selecionado:</strong> ${p.nome} - ${p.cpf}`;
+                    resultados.innerHTML = '';
+                };
+
+                resultados.appendChild(item);
+            });
+        });
+});
+</script>
+
+</body>
+</html>

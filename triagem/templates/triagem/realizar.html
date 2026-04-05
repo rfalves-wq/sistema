@@ -1,0 +1,25 @@
+<h2>Triagem do Paciente</h2>
+
+<p><b>Paciente:</b> {{ agendamento.paciente.nome }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="pressao" placeholder="Pressão arterial"><br><br>
+
+    <input type="number" step="0.1" name="temperatura" placeholder="Temperatura"><br><br>
+
+    <input type="number" name="batimento" placeholder="Batimentos cardíacos"><br><br>
+
+    <input type="number" name="saturacao" placeholder="Saturação O2"><br><br>
+
+    <textarea name="queixa" placeholder="Queixa do paciente"></textarea><br><br>
+
+    <select name="prioridade">
+        <option value="VERDE">Verde</option>
+        <option value="AMARELO">Amarelo</option>
+        <option value="VERMELHO">Vermelho</option>
+    </select><br><br>
+
+    <button type="submit">Salvar Triagem</button>
+</form>

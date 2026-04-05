@@ -1,4 +1,11 @@
-adicionar login/logout - ok
-melhorar o layout com Bootstrap -ok 
-🔐 Controle por tipo de usuário (ESSENCIAL)
-📊 Depois o dashboard
+from usuario.models import Usuario
+
+u = Usuario.objects.create_user(
+    username='admin',
+    password='123456'
+)
+
+u.tipo_usuario = 'administrador'
+u.is_staff = True
+u.is_superuser = True
+u.save()

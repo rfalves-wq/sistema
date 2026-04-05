@@ -43,15 +43,21 @@ from datetime import date
 from django.shortcuts import render
 from .models import Agendamento
 
+
+
 def listar_agendamentos(request):
     hoje = date.today()
 
     agendamentos = Agendamento.objects.filter(
         data=hoje
-    ).order_by('-hora')  # 🔥 ORDEM DECRESCENTE
+    ).order_by('-hora')
+
+    total_hoje = agendamentos.count()  # 🔥 TOTAL
 
     return render(request, 'agendamento/listar.html', {
-        'agendamentos': agendamentos
+        'agendamentos': agendamentos,
+        'total_hoje': total_hoje,
+        'hoje': hoje
     })
 
 from django.http import JsonResponse

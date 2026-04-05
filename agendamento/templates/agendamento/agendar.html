@@ -29,6 +29,13 @@
 
     <div class="card shadow p-4">
 
+        <!-- 🔙 BOTÃO VOLTAR -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <a href="{% url 'dashboard_recepcionista' %}" class="btn btn-outline-secondary">
+                ← Voltar ao Dashboard
+            </a>
+        </div>
+
         <h3 class="mb-4 text-center">📅 Agendamento</h3>
 
         {% if erro %}
@@ -58,13 +65,11 @@
                 {{ form.data }}
             </div>
 
-            <!-- HORA (CONTROLADA MANUALMENTE) -->
+            <!-- HORA -->
             <div class="mb-3">
                 <label class="form-label">Hora:</label>
                 <input type="text" name="hora" id="hora" class="form-control">
             </div>
-
-           
 
             <!-- STATUS -->
             <div class="mb-3">
@@ -92,15 +97,15 @@ document.addEventListener("DOMContentLoaded", function () {
         locale: "pt-BR"
     });
 
-    // ⏰ HORA (100% FUNCIONAL)
-flatpickr("#hora", {
-    enableTime: true,
-    noCalendar: true,
-    dateFormat: "H:i",
-    time_24hr: true,
-    minuteIncrement: 1,
-    defaultDate: new Date() // 🔥 hora atual automática
-});
+    // ⏰ HORA
+    flatpickr("#hora", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        time_24hr: true,
+        minuteIncrement: 1,
+        defaultDate: new Date()
+    });
 
 });
 

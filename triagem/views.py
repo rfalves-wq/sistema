@@ -30,3 +30,4 @@ def realizar_triagem(request, agendamento_id):
         return redirect('fila_triagem')
 
     return render(request, 'triagem/realizar.html', {'agendamento': agendamento})
+

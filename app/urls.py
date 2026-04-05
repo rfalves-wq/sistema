@@ -25,5 +25,6 @@ urlpatterns = [
         path('agendamento/', include('agendamento.urls')),
     
    path('triagem/', include('triagem.urls')),
+   
     
 ]

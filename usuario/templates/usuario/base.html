@@ -64,7 +64,8 @@
 
                 {% if request.user.tipo_usuario == 'enfermeiro' %}
                 <a href="{% url 'dashboard_enfermeiro' %}">Dashboard</a>
-                <a href="{% url 'listar_usuario' %}">Usuários</a>
+                <a href="{% url 'fila_triagem' %}">Triagem</a>
+                 
                 {% endif %}
 
                 {% if request.user.tipo_usuario == 'tecnico' %}

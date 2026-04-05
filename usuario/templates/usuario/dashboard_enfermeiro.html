@@ -2,61 +2,35 @@
 
 {% block conteudo %}
 
-<h2 class="mb-4">Dashboard Recepcionista</h2>
+<h2 class="mb-4">Dashboard enfermeiro</h2>
 
 <div class="row">
 
-    <!-- BOAS VINDAS -->
+    <!-- 👋 BOAS VINDAS -->
     <div class="col-md-12 mb-3">
         <div class="card shadow p-3">
             <h4>Bem-vindo, {{ request.user.username }} 👋</h4>
-            <p>Área de atendimento e cadastro</p>
+            <p>Área de atendimento, cadastro e organização da fila</p>
         </div>
     </div>
 
-    <!-- CADASTRAR PACIENTE -->
-    <div class="col-md-6 mb-3">
+   
+
+  
+
+    <!-- 🩺 TRIAGEM -->
+    <div class="col-md-4 mb-3">
         <div class="card shadow p-3 text-center">
-            <h5>Cadastrar Paciente</h5>
-            <a href="{% url 'cadastrar_paciente' %}" class="btn btn-primary mt-2">
-                + Novo Paciente
+            <h5>Triagem</h5>
+            <a href="{% url 'fila_triagem' %}" class="btn btn-danger mt-2">
+                Ir para Triagem
             </a>
         </div>
     </div>
 
-    <!-- LISTAR PACIENTES -->
-    <div class="col-md-6 mb-3">
-        <div class="card shadow p-3 text-center">
-            <h5>Ver Pacientes</h5>
-            <a href="{% url 'listar_pacientes' %}" class="btn btn-dark mt-2">
-                Visualizar Lista
-            </a>
-        </div>
-    </div>
 
-    <!-- 🔥 NOVO AGENDAMENTO -->
-    <div class="col-md-6 mb-3">
-        <div class="card shadow p-3 text-center">
-            <h5>Agendar Consulta</h5>
-            <a href="{% url 'agendar' %}" class="btn btn-success mt-2">
-                + Novo Agendamento
-            </a>
-        </div>
-    </div>
-
-    <!-- 🔥 LISTAR AGENDAMENTOS -->
-    <div class="col-md-6 mb-3">
-        <div class="card shadow p-3 text-center">
-            <h5>Ver Agendamentos</h5>
-            <a href="{% url 'listar_agendamentos' %}" class="btn btn-warning mt-2">
-                Visualizar Agenda
-            </a>
-        </div>
-    </div>
-
-    
+   
 
 </div>
-
 
 {% endblock %}

@@ -106,3 +106,5 @@ def mudar_status(request, id):
     agendamento.save()
 
     return redirect('listar_agendamentos')
+
+

@@ -15,4 +15,5 @@ path('dashboard/medico/', views.dashboard_medico, name='dashboard_medico'),
 path('dashboard/enfermeiro/', views.dashboard_enfermeiro, name='dashboard_enfermeiro'),
 path('dashboard/recepcionista/', views.dashboard_recepcionista, name='dashboard_recepcionista'),
 path('dashboard/tecnico/', views.dashboard_tecnico, name='dashboard_tecnico'),
+
 ]

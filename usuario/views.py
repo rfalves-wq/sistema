@@ -133,5 +133,3 @@ def dashboard_recepcionista(request):
 @login_required
 def dashboard_tecnico(request):
     return render(request, 'usuario/dashboard_tecnico.html')
-
-

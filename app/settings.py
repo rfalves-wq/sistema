@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'paciente',
     'agendamento',
     
-    
 ]
 
 MIDDLEWARE = [

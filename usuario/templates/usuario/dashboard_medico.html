@@ -1,7 +1,38 @@
 {% extends 'usuario/base.html' %}
 
 {% block conteudo %}
-<h2>Dashboard medico</h2>
 
+<h2 class="mb-4">🏥 Dashboard Médico</h2>
+
+<div class="row">
+
+    <!-- 👋 BOAS VINDAS -->
+    <div class="col-md-12 mb-3">
+        <div class="card shadow p-3 border-primary">
+            <h4>👨‍⚕️ Bem-vindo, {{ request.user.username }}</h4>
+            <p class="text-muted mb-0">
+                Área médica para atendimento de pacientes vindos da triagem.
+            </p>
+        </div>
+    </div>
+
+    <!-- 🩺 FILA DO MÉDICO -->
+    <div class="col-md-4 mb-3">
+        <div class="card shadow p-3 text-center border-danger">
+
+            <h5>📋 Fila do Médico</h5>
+
+            <p class="text-muted mb-2">
+                Pacientes aguardando atendimento médico.
+            </p>
+
+            <a href="{% url 'fila_medico' %}" class="btn btn-danger mt-2 w-100">
+                Acessar Fila
+            </a>
+
+        </div>
+    </div>
+
+</div>
 
 {% endblock %}

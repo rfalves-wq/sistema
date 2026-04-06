@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'paciente',
     'agendamento',
     'triagem',
+    'medico',
     
 ]
 

@@ -1,0 +1,28 @@
+{% extends 'usuario/base.html' %}
+
+{% block conteudo %}
+
+<h2>Atendimento Médico</h2>
+
+<p><strong>Paciente:</strong> {{ atendimento.triagem.paciente.nome }}</p>
+<p><strong>Queixa:</strong> {{ atendimento.triagem.queixa }}</p>
+
+<hr>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label>Diagnóstico</label>
+        <textarea name="diagnostico" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Prescrição</label>
+        <textarea name="prescricao" class="form-control"></textarea>
+    </div>
+
+    <button class="btn btn-success">Finalizar Atendimento</button>
+</form>
+
+{% endblock %}

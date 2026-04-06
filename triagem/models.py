@@ -26,6 +26,17 @@ class Triagem(models.Model):
         default='VERDE'
     )
 
+    # 🔥 ESSENCIAL PARA FILA
+    status = models.CharField(
+        max_length=20,
+        choices=[
+            ('espera', 'Em espera'),
+            ('atendimento', 'Em atendimento'),
+            ('finalizado', 'Finalizado'),
+        ],
+        default='espera'
+    )
+
     data_triagem = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

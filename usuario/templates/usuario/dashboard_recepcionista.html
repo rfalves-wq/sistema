@@ -2,61 +2,106 @@
 
 {% block conteudo %}
 
-<h2 class="mb-4">Dashboard Recepcionista</h2>
+<div class="container mt-4">
 
-<div class="row">
+    <!-- TÍTULO -->
+    <h2 class="mb-4 text-primary fw-bold">
+        📊 Dashboard Recepcionista
+    </h2>
 
-    <!-- BOAS VINDAS -->
-    <div class="col-md-12 mb-3">
-        <div class="card shadow p-3">
-            <h4>Bem-vindo, {{ request.user.username }} 👋</h4>
-            <p>Área de atendimento e cadastro</p>
+    <div class="row">
+
+        <!-- BOAS VINDAS -->
+        <div class="col-md-12 mb-4">
+            <div class="card shadow-lg border-0 p-4 bg-light">
+                <h4 class="fw-bold">
+                    👋 Bem-vindo, {{ request.user.username }}
+                </h4>
+                <p class="text-muted mb-0">
+                    Gerencie pacientes, agendamentos e atendimentos com facilidade.
+                </p>
+            </div>
         </div>
+
+        <!-- CADASTRAR PACIENTE -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow border-0 text-center h-100">
+                <div class="card-body">
+                    <h1>👤</h1>
+                    <h5 class="fw-bold">Novo Paciente</h5>
+                    <p class="text-muted">Cadastrar paciente no sistema</p>
+                    <a href="{% url 'cadastrar_paciente' %}" class="btn btn-primary w-100">
+                        Cadastrar
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- LISTAR PACIENTES -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow border-0 text-center h-100">
+                <div class="card-body">
+                    <h1>📋</h1>
+                    <h5 class="fw-bold">Pacientes</h5>
+                    <p class="text-muted">Ver lista completa</p>
+                    <a href="{% url 'listar_pacientes' %}" class="btn btn-dark w-100">
+                        Visualizar
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- AGENDAR -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow border-0 text-center h-100">
+                <div class="card-body">
+                    <h1>📅</h1>
+                    <h5 class="fw-bold">Agendar</h5>
+                    <p class="text-muted">Criar novo agendamento</p>
+                    <a href="{% url 'agendar' %}" class="btn btn-success w-100">
+                        Agendar
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- AGENDAMENTOS -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow border-0 text-center h-100">
+                <div class="card-body">
+                    <h1>🗂️</h1>
+                    <h5 class="fw-bold">Agenda</h5>
+                    <p class="text-muted">Ver todos agendamentos</p>
+                    <a href="{% url 'listar_agendamentos' %}" class="btn btn-warning w-100">
+                        Ver Agenda
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- CADASTRAR PACIENTE -->
-    <div class="col-md-6 mb-3">
-        <div class="card shadow p-3 text-center">
-            <h5>Cadastrar Paciente</h5>
-            <a href="{% url 'cadastrar_paciente' %}" class="btn btn-primary mt-2">
-                + Novo Paciente
-            </a>
-        </div>
-    </div>
+    <!-- 🔥 EXTRA: RESUMO RÁPIDO -->
+    <div class="row mt-3">
 
-    <!-- LISTAR PACIENTES -->
-    <div class="col-md-6 mb-3">
-        <div class="card shadow p-3 text-center">
-            <h5>Ver Pacientes</h5>
-            <a href="{% url 'listar_pacientes' %}" class="btn btn-dark mt-2">
-                Visualizar Lista
-            </a>
+        <div class="col-md-6 mb-3">
+            <div class="card shadow border-0 text-center p-3">
+                <h6 class="text-muted">Pacientes cadastrado </h6>
+                <h3 class="fw-bold text-primary">{{ total_pacientes_hoje|default:"0" }}</h3>
+            </div>
         </div>
-    </div>
 
-    <!-- 🔥 NOVO AGENDAMENTO -->
-    <div class="col-md-6 mb-3">
-        <div class="card shadow p-3 text-center">
-            <h5>Agendar Consulta</h5>
-            <a href="{% url 'agendar' %}" class="btn btn-success mt-2">
-                + Novo Agendamento
-            </a>
+        <div class="col-md-6 mb-3">
+            <div class="card shadow border-0 text-center p-3">
+                <h6 class="text-muted">Agendamentos Hoje</h6>
+                <h3 class="fw-bold text-success">{{ total_agendamentos_hoje|default:"0" }}</h3>
+            </div>
         </div>
-    </div>
 
-    <!-- 🔥 LISTAR AGENDAMENTOS -->
-    <div class="col-md-6 mb-3">
-        <div class="card shadow p-3 text-center">
-            <h5>Ver Agendamentos</h5>
-            <a href="{% url 'listar_agendamentos' %}" class="btn btn-warning mt-2">
-                Visualizar Agenda
-            </a>
-        </div>
-    </div>
+       
 
-    
+    </div>
 
 </div>
-
 
 {% endblock %}

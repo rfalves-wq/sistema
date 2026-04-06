@@ -1,25 +1,82 @@
-<h2>Triagem do Paciente</h2>
+{% extends 'usuario/base.html' %}
 
-<p><b>Paciente:</b> {{ agendamento.paciente.nome }}</p>
+{% block conteudo %}
 
-<form method="POST">
-    {% csrf_token %}
+<div class="container mt-4">
 
-    <input type="text" name="pressao" placeholder="Pressão arterial"><br><br>
+    <h2 class="mb-4 text-primary">
+        🩺 Triagem do Paciente
+    </h2>
 
-    <input type="number" step="0.1" name="temperatura" placeholder="Temperatura"><br><br>
+    <div class="card shadow-lg border-0">
+        <div class="card-body">
 
-    <input type="number" name="batimento" placeholder="Batimentos cardíacos"><br><br>
+            <!-- Dados do paciente -->
+            <div class="mb-4">
+                <h5 class="text-secondary">👤 Dados do Paciente</h5>
+                <p class="mb-0">
+                    <strong>Nome:</strong> {{ agendamento.paciente.nome }}
+                </p>
+            </div>
 
-    <input type="number" name="saturacao" placeholder="Saturação O2"><br><br>
+            <form method="POST">
+                {% csrf_token %}
 
-    <textarea name="queixa" placeholder="Queixa do paciente"></textarea><br><br>
+                <div class="row">
 
-    <select name="prioridade">
-        <option value="VERDE">Verde</option>
-        <option value="AMARELO">Amarelo</option>
-        <option value="VERMELHO">Vermelho</option>
-    </select><br><br>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Pressão Arterial</label>
+                        <input type="text" name="pressao" class="form-control" placeholder="Ex: 120/80">
+                    </div>
 
-    <button type="submit">Salvar Triagem</button>
-</form>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Temperatura</label>
+                        <input type="number" step="0.1" name="temperatura" class="form-control" placeholder="Ex: 36.5">
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Batimentos</label>
+                        <input type="number" name="batimento" class="form-control" placeholder="Ex: 80">
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Saturação O2</label>
+                        <input type="number" name="saturacao" class="form-control" placeholder="Ex: 98">
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Queixa do Paciente</label>
+                    <textarea name="queixa" class="form-control" rows="3" placeholder="Descreva a queixa..."></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Prioridade</label>
+                    <select name="prioridade" class="form-select">
+                        <option value="VERDE">🟢 Verde (Baixa)</option>
+                        <option value="AMARELO">🟡 Amarelo (Média)</option>
+                        <option value="VERMELHO">🔴 Vermelho (Urgente)</option>
+                    </select>
+                </div>
+
+                <div class="d-flex justify-content-between">
+
+                    <a href="{% url 'fila_triagem' %}" class="btn btn-outline-secondary">
+    ← Voltar
+</a>
+
+                    <button type="submit" class="btn btn-success">
+                        ✔ Salvar Triagem
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

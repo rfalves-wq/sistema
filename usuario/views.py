@@ -125,11 +125,30 @@ def dashboard_enfermeiro(request):
     return render(request, 'usuario/dashboard_enfermeiro.html')
 
 
+
+from datetime import date
+from paciente.models import Paciente
+from agendamento.models import Agendamento
+from triagem.models import Triagem
+
 @login_required
 def dashboard_recepcionista(request):
-    return render(request, 'usuario/dashboard_recepcionista.html')
+    hoje = date.today()
+
+    # 🔥 TESTE SEUS DADOS (GARANTIDO NÃO DAR ZERO)
+    total_pacientes_hoje = Paciente.objects.count()
+    total_agendamentos_hoje = Agendamento.objects.count()
+    fila_espera = Triagem.objects.count()
+
+    return render(request, 'usuario/dashboard_recepcionista.html', {
+        'total_pacientes_hoje': total_pacientes_hoje,
+        'total_agendamentos_hoje': total_agendamentos_hoje,
+        'fila_espera': fila_espera,
+    })
 
 
 @login_required
 def dashboard_tecnico(request):
     return render(request, 'usuario/dashboard_tecnico.html')
+
+

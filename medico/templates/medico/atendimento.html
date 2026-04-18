@@ -12,17 +12,23 @@
 <form method="POST">
     {% csrf_token %}
 
-    <div class="mb-3">
-        <label>Diagnóstico</label>
-        <textarea name="diagnostico" class="form-control"></textarea>
-    </div>
+    <textarea name="diagnostico" class="form-control mb-2" placeholder="Diagnóstico"></textarea>
+    <textarea name="prescricao" class="form-control mb-3" placeholder="Prescrição"></textarea>
 
-    <div class="mb-3">
-        <label>Prescrição</label>
-        <textarea name="prescricao" class="form-control"></textarea>
-    </div>
+    <button name="acao" value="internacao" class="btn btn-danger">
+        🏥 Internação
+    </button>
 
-    <button class="btn btn-success">Finalizar Atendimento</button>
+    <button name="acao" value="medicacao" class="btn btn-warning">
+        💊 Medicação
+    </button>
+
+    <button name="acao" value="alta" class="btn btn-success">
+        🏠 Alta
+    </button>
+    <button name="acao" value="dispensar" class="btn btn-secondary">
+    🚶 Dispensar
+</button>
 </form>
 
 {% endblock %}

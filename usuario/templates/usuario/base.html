@@ -58,9 +58,10 @@
                 <a href="{% url 'agendar' %}">Agendamento</a>
                 {% endif %}
 
-                {% if request.user.tipo_usuario == 'medico' %}
-                <a href="{% url 'dashboard_medico' %}">Dashboard</a>
-                {% endif %}
+              {% if request.user.tipo_usuario == 'medico' %}
+    <a href="{% url 'dashboard_medico' %}">Dashboard</a>
+    <a href="{% url 'fila_medico' %}">Fila de Pacientes</a>
+{% endif %}
 
                 {% if request.user.tipo_usuario == 'enfermeiro' %}
                 <a href="{% url 'dashboard_enfermeiro' %}">Dashboard</a>

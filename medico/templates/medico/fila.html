@@ -5,9 +5,8 @@
 <h2>Fila do Médico</h2>
 
 <div id="fila-container">
-    {% include 'medico/partials/_fila_lista.html' %}
+    <!-- vazio -->
 </div>
-
 
 <script>
 function atualizarFila() {
@@ -18,7 +17,11 @@ function atualizarFila() {
         });
 }
 
+// carrega ao abrir
+atualizarFila()
+
 // atualiza a cada 5 segundos
 setInterval(atualizarFila, 5000);
 </script>
+
 {% endblock %}

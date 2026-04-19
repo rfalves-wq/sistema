@@ -33,8 +33,9 @@ class Triagem(models.Model):
         ('espera', 'Em espera'),
         ('atendimento', 'Em atendimento'),
         ('internacao', 'Internação'),
-        ('aguardando_medicacao', 'Aguardando Medicação'),  # 🔥 AQUI
-        ('medicado', 'Medicado'),  # 🔥 NOVO
+        ('aguardando_medicacao', 'Aguardando Medicação'),
+        ('medicado', 'Medicado'),
+        ('retorno_medico', 'Retorno ao Médico'),  # 🔥 NOVO
         ('alta', 'Alta'),
         ('dispensado', 'Dispensado'),
     ],

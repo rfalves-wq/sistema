@@ -44,7 +44,7 @@ def aplicar_medicacao(request, triagem_id):
             observacao=observacao
         )
 
-        triagem.status = 'medicado'
+        triagem.status = 'retorno_medico'
         triagem.save()
 
         return redirect('fila_medicacao')

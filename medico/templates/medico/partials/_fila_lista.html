@@ -2,22 +2,50 @@
     <tr>
         <th>Paciente</th>
         <th>Queixa</th>
+        <th>Status</th>
         <th>Ação</th>
     </tr>
 
     {% for triagem in triagens %}
-    <tr>
+
+    <tr class="{% if triagem.status == 'retorno_medico' %}table-warning{% endif %}">
         <td>{{ triagem.paciente.nome }}</td>
         <td>{{ triagem.queixa }}</td>
+
+        <td>
+            {% if triagem.status == 'retorno_medico' %}
+                <span class="badge bg-warning">Retorno</span>
+            {% else %}
+                <span class="badge bg-primary">Novo</span>
+            {% endif %}
+        </td>
+
         <td>
             <a href="{% url 'iniciar_atendimento' triagem.id %}" class="btn btn-primary">
                 Atender
             </a>
         </td>
     </tr>
+
+    {% if triagem.status == 'retorno_medico' %}
+    <tr>
+        <td colspan="4">
+            <div class="alert alert-warning">
+                🔔 Paciente retornou após medicação
+            </div>
+
+            {% if triagem.medicacao_set.last %}
+                <strong>Última Medicação:</strong><br>
+                {{ triagem.medicacao_set.last.medicamento }}<br>
+                {{ triagem.medicacao_set.last.dose }}
+            {% endif %}
+        </td>
+    </tr>
+    {% endif %}
+
     {% empty %}
     <tr>
-        <td colspan="3">Nenhum paciente na fila</td>
+        <td colspan="4">Nenhum paciente na fila</td>
     </tr>
     {% endfor %}
 </table>

@@ -31,6 +31,12 @@
     🚶 Dispensar
 </button>
 </form> -->
+
+{% if triagem.status == 'retorno_medico' %}
+    <div class="alert alert-info">
+        Paciente retornou após medicação
+    </div>
+{% endif %}
 <form method="POST">
     {% csrf_token %}
 

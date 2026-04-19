@@ -4,12 +4,13 @@ from .models import AtendimentoMedico
 
 # FILA DO MÉDICO (NÃO SOME PACIENTE)
 def fila_medico(request):
-    triagens = Triagem.objects.filter(status='espera').order_by('-prioridade', '-data_triagem')
+    triagens = Triagem.objects.filter(
+        status__in=['espera', 'retorno_medico']
+    ).order_by('-prioridade', '-data_triagem')
 
     return render(request, 'medico/fila.html', {
         'triagens': triagens
     })
-
 
 # INICIAR ATENDIMENTO
 def iniciar_atendimento(request, triagem_id):
@@ -61,27 +62,32 @@ def atendimento_detalhe(request, atendimento_id):
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 
+def fila_medico(request):
+    triagens = Triagem.objects.filter(
+        status__in=['espera', 'retorno_medico']
+    ).order_by('-prioridade', '-data_triagem')
+
+    return render(request, 'medico/fila.html', {
+        'triagens': triagens
+    })
+   
+
+
+def fila_medicacao(request):
+    triagens = Triagem.objects.filter(status='medicacao')
+
+    return render(request, 'medico/fila_medicacao.html', {
+        'triagens': triagens
+    })
+    
+    
 def fila_medico_ajax(request):
-    triagens = Triagem.objects.filter(status='espera').order_by('-data_triagem')
+    triagens = Triagem.objects.filter(
+        status__in=['espera', 'retorno_medico']
+    ).order_by('-prioridade', '-data_triagem')
 
     html = render_to_string('medico/partials/_fila_lista.html', {
         'triagens': triagens
     })
 
     return JsonResponse({'html': html})
-
-
-def fila_medicacao(request):
-    triagens = Triagem.objects.filter(status='medicacao')
-
-    return render(request, 'medico/fila_medicacao.html', {
-        'triagens': triagens
-    })
-    
-    
-def fila_medicacao(request):
-    triagens = Triagem.objects.filter(status='medicacao')
-
-    return render(request, 'medico/fila_medicacao.html', {
-        'triagens': triagens
-    })   

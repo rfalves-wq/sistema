@@ -1,0 +1,19 @@
+<h2>Fila de Medicação</h2>
+
+<table class="table">
+    <tr>
+        <th>Paciente</th>
+        <th>Prescrição</th>
+    </tr>
+
+    {% for triagem in triagens %}
+    <tr>
+        <td>{{ triagem.paciente.nome }}</td>
+        <td>{{ triagem.atendimentomedico.prescricao }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="2">Nenhum paciente para medicação</td>
+    </tr>
+    {% endfor %}
+</table>

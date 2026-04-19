@@ -69,3 +69,19 @@ def fila_medico_ajax(request):
     })
 
     return JsonResponse({'html': html})
+
+
+def fila_medicacao(request):
+    triagens = Triagem.objects.filter(status='medicacao')
+
+    return render(request, 'medico/fila_medicacao.html', {
+        'triagens': triagens
+    })
+    
+    
+def fila_medicacao(request):
+    triagens = Triagem.objects.filter(status='medicacao')
+
+    return render(request, 'medico/fila_medicacao.html', {
+        'triagens': triagens
+    })   

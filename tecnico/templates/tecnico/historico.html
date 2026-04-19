@@ -1,0 +1,27 @@
+{% extends 'usuario/base.html' %}
+
+{% block conteudo %}
+
+<h2>Histórico de Medicações</h2>
+
+<table class="table">
+    <tr>
+        <th>Paciente</th>
+        <th>Medicamento</th>
+        <th>Dose</th>
+        <th>Técnico</th>
+        <th>Data</th>
+    </tr>
+
+    {% for m in medicacoes %}
+    <tr>
+        <td>{{ m.triagem.paciente.nome }}</td>
+        <td>{{ m.medicamento }}</td>
+        <td>{{ m.dose }}</td>
+        <td>{{ m.tecnico.username }}</td>
+        <td>{{ m.data_aplicacao }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

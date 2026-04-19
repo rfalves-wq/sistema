@@ -36,7 +36,7 @@ def atendimento_detalhe(request, atendimento_id):
             atendimento.triagem.status = 'internacao'
 
         elif acao == 'medicacao':
-            atendimento.triagem.status = 'medicacao'
+            atendimento.triagem.status = 'aguardando_medicacao'
 
         elif acao == 'alta':
             atendimento.triagem.status = 'alta'

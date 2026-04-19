@@ -1,0 +1,31 @@
+{% extends 'usuario/base.html' %}
+
+{% block conteudo %}
+
+<h2>Aplicar Medicação</h2>
+
+<p><strong>Paciente:</strong> {{ triagem.paciente.nome }}</p>
+<p><strong>Prescrição:</strong> {{ triagem.atendimentomedico.prescricao }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label>Medicamento</label>
+        <input type="text" name="medicamento" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Dose</label>
+        <input type="text" name="dose" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Observação</label>
+        <textarea name="observacao" class="form-control"></textarea>
+    </div>
+
+    <button class="btn btn-success">Confirmar Medicação</button>
+</form>
+
+{% endblock %}

@@ -28,14 +28,15 @@ class Triagem(models.Model):
 
     # 🔥 ESSENCIAL PARA FILA
     status = models.CharField(
-    max_length=20,
+    max_length=30,
     choices=[
         ('espera', 'Em espera'),
         ('atendimento', 'Em atendimento'),
         ('internacao', 'Internação'),
-        ('medicacao', 'Medicação'),
+        ('aguardando_medicacao', 'Aguardando Medicação'),  # 🔥 AQUI
+        ('medicado', 'Medicado'),  # 🔥 NOVO
         ('alta', 'Alta'),
-         ('dispensado', 'Dispensado'),
+        ('dispensado', 'Dispensado'),
     ],
     default='espera'
 )

@@ -1,0 +1,32 @@
+{% extends 'usuario/base.html' %}
+
+{% block conteudo %}
+
+<h2>Fila de Medicação</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Paciente</th>
+        <th>Prescrição</th>
+        <th>Ação</th>
+    </tr>
+
+    {% for triagem in triagens %}
+    <tr>
+        <td>{{ triagem.paciente.nome }}</td>
+        <td>{{ triagem.atendimentomedico.prescricao }}</td>
+
+        <td>
+            <a href="{% url 'aplicar_medicacao' triagem.id %}" class="btn btn-success">
+                Aplicar
+            </a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="3">Nenhum paciente aguardando</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

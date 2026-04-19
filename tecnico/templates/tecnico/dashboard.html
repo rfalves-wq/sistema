@@ -1,0 +1,30 @@
+{% extends 'usuario/base.html' %}
+
+{% block conteudo %}
+
+<h2>Dashboard do Técnico</h2>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="card p-3 bg-warning text-white">
+            <h4>Aguardando Medicação</h4>
+            <h2>{{ aguardando }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card p-3 bg-success text-white">
+            <h4>Pacientes Medicados</h4>
+            <h2>{{ medicados }}</h2>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<a href="{% url 'fila_medicacao' %}" class="btn btn-primary">Ver Fila</a>
+<a href="{% url 'historico_medicacao' %}" class="btn btn-secondary">Histórico</a>
+
+{% endblock %}

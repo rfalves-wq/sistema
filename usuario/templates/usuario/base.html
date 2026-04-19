@@ -28,6 +28,16 @@
         .sidebar a:hover {
             background: #495057;
         }
+
+        @keyframes piscar {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+.linha-retorno {
+    animation: piscar 1s infinite;
+}
     </style>
 </head>
 

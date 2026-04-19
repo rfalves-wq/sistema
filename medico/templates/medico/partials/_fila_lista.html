@@ -8,7 +8,7 @@
 
     {% for triagem in triagens %}
 
-    <tr class="{% if triagem.status == 'retorno_medico' %}table-warning{% endif %}">
+    <tr class="{% if triagem.status == 'retorno_medico' %}table-warning linha-retorno{% endif %}">
         <td>{{ triagem.paciente.nome }}</td>
         <td>{{ triagem.queixa }}</td>
 

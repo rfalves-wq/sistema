@@ -8,52 +8,79 @@
 <p><strong>Queixa:</strong> {{ atendimento.triagem.queixa }}</p>
 
 <hr>
-<!--
+
+<!-- 🔔 AVISO DE RETORNO -->
+
+{% if atendimento.triagem.status == 'retorno_medico' %}
+
+<div class="alert alert-warning">
+    🔔 Paciente retornou após medicação — realizar reavaliação
+</div>
+{% endif %}
+
+<!-- 💉 ÚLTIMA MEDICAÇÃO -->
+
+{% if atendimento.triagem.medicacao_set.last %}
+
+<div class="alert alert-info">
+    <strong>Última Medicação:</strong><br>
+    Medicamento: {{ atendimento.triagem.medicacao_set.last.medicamento }}<br>
+    Dose: {{ atendimento.triagem.medicacao_set.last.dose }}<br>
+    Data: {{ atendimento.triagem.medicacao_set.last.data_aplicacao }}
+</div>
+{% endif %}
+
+<hr>
+
+<!-- 📋 TODAS AS MEDICAÇÕES -->
+
+<h5>Histórico de Medicações</h5>
+
+{% for m in atendimento.triagem.medicacao_set.all|dictsortreversed:"data_aplicacao" %} <div class="alert alert-secondary">
+💉 {{ m.medicamento }} |
+Dose: {{ m.dose }} |
+{{ m.data_aplicacao }} </div>
+{% empty %} <p>Nenhuma medicação aplicada</p>
+{% endfor %}
+
+<hr>
+
+<!-- 📝 FORMULÁRIO -->
+
 <form method="POST">
     {% csrf_token %}
 
-    <textarea name="diagnostico" class="form-control mb-2" placeholder="Diagnóstico"></textarea>
-    <textarea name="prescricao" class="form-control mb-3" placeholder="Prescrição"></textarea>
+```
+<div class="mb-3">
+    <label>Diagnóstico</label>
+    <textarea name="diagnostico" class="form-control"></textarea>
+</div>
 
-    <button name="acao" value="internacao" class="btn btn-danger">
-        🏥 Internação
-    </button>
+<div class="mb-3">
+    <label>Prescrição</label>
+    <textarea name="prescricao" class="form-control"></textarea>
+</div>
 
-    <button name="acao" value="medicacao" class="btn btn-warning">
-        💊 Medicação
-    </button>
+<hr>
 
-    <button name="acao" value="alta" class="btn btn-success">
-        🏠 Alta
-    </button>
-    
-    <button name="acao" value="dispensar" class="btn btn-secondary">
+<!-- AÇÕES -->
+<button name="acao" value="internacao" class="btn btn-danger">
+    🏥 Internação
+</button>
+
+<button name="acao" value="medicacao" class="btn btn-warning">
+    💊 Medicação
+</button>
+
+<button name="acao" value="alta" class="btn btn-success">
+    🏠 Alta
+</button>
+
+<button name="acao" value="dispensar" class="btn btn-secondary">
     🚶 Dispensar
 </button>
-</form> -->
+```
 
-{% if triagem.status == 'retorno_medico' %}
-    <div class="alert alert-info">
-        Paciente retornou após medicação
-    </div>
-{% endif %}
-<form method="POST">
-    {% csrf_token %}
-
-    <textarea name="diagnostico" class="form-control"></textarea>
-    <textarea name="prescricao" class="form-control"></textarea>
-
-    <button name="acao" value="internacao" class="btn btn-danger">Internação</button>
-
-    <button name="acao" value="medicacao" class="btn btn-warning">
-        Medicação
-    </button>
-
-    <button name="acao" value="alta" class="btn btn-success">Alta</button>
-
-    <button name="acao" value="dispensar" class="btn btn-secondary">
-        Dispensar
-    </button>
 </form>
 
 {% endblock %}

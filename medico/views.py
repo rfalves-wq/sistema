@@ -4,7 +4,7 @@ from .models import AtendimentoMedico
 
 # FILA DO MÉDICO (NÃO SOME PACIENTE)
 def fila_medico(request):
-    triagens = Triagem.objects.exclude(status='alta').order_by('-data_triagem')
+    triagens = Triagem.objects.filter(status='espera').order_by('-prioridade', '-data_triagem')
 
     return render(request, 'medico/fila.html', {
         'triagens': triagens
@@ -53,5 +53,19 @@ def atendimento_detalhe(request, atendimento_id):
         return redirect('fila_medico')
 
     return render(request, 'medico/atendimento.html', {
-        'atendimento': atendimento
+    'atendimento': atendimento,
+    'triagem': atendimento.triagem
+})
+    
+    
+from django.template.loader import render_to_string
+from django.http import JsonResponse
+
+def fila_medico_ajax(request):
+    triagens = Triagem.objects.filter(status='espera').order_by('-data_triagem')
+
+    html = render_to_string('medico/partials/_fila_lista.html', {
+        'triagens': triagens
     })
+
+    return JsonResponse({'html': html})
